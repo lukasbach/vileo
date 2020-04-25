@@ -21,7 +21,7 @@
     "start": "react-scripts start",
     "start-https": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts build",
+    "test": "CI=false react-scripts build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
