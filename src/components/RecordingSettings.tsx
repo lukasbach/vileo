@@ -39,10 +39,6 @@ export const RecordingSettings: React.FC<{
     }
   }, [videoMediaStream]);
 
-  useEffect(() => {
-    MediaService.getDevices().then(setMediaDevices);
-  }, []);
-
   return (
     <AppContainer title="Configure Recording">
       {
@@ -143,10 +139,17 @@ export const RecordingSettings: React.FC<{
       }
 
       <Select
-        options={mediaDevices.filter(device => device.kind === 'audioinput').map(device => ({ id: device.deviceId, value: device.label, icon: 'mic' }))}
         onChange={selection => selection && setAudioMediaDevices([...audioMediaDevices, mediaDevices.find(device => device.deviceId === selection)!])}
         title={'Add audio source'}
         dontSelect={true}
+        getOptions={async () => {
+          await navigator.mediaDevices.getUserMedia({ audio: true });
+          const devices = await MediaService.getDevices();
+          setMediaDevices(devices);
+          return devices
+            .filter(device => device.kind === 'audioinput')
+            .map(device => ({ id: device.deviceId, value: device.label, icon: 'mic' }));
+        }}
       />
 
       <div className="bottom-actions">
