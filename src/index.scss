@@ -1,0 +1,337 @@
+$primaryColor: #1abc9c;
+$bodyBg: #282c34;
+$containerBg: #1e2128;
+
+@keyframes recorderAnimation {
+  0% {background-color: $containerBg;}
+  50% {background-color: darken($containerBg, 2%);}
+  99% {background-color: $containerBg;}
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Manrope', sans-serif;
+}
+
+html {
+  font-size: 1.2em;
+}
+
+.app-container {
+  background-color: $bodyBg;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+header {
+  position: absolute;
+  // top: 2rem;
+  // left: 0;
+  // width: 100vw;
+
+  top: -12rem;
+  width: 100%;
+
+  text-align: center;
+  font-size: 10rem;
+  font-weight: 800;
+  color: darken($bodyBg, 3%);
+  text-shadow: -8px 8px 0 darken($bodyBg, 8%);
+
+}
+
+.app-container-inner {
+  background-color: $containerBg;
+  padding: .8rem 1.2rem;
+  border-radius: 1.2rem;
+
+  width: 600px;
+
+  position: relative;
+  color: white;
+
+  &.recording {
+    animation-name: recorderAnimation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+  }
+
+  h1 {
+    position: absolute;
+    top: -1.6rem;
+    left: 1rem;
+    margin: 0;
+  }
+}
+
+.checkbox-container {
+  display: block;
+  margin: .4rem 0;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .material-icons {
+    vertical-align: text-bottom;
+    margin-right: .4rem;
+  }
+}
+
+.btn {
+  background-color: $primaryColor;
+  color: $containerBg;
+
+  cursor: pointer;
+  outline: none;
+
+  border: none;
+  border-radius: 6px;
+  padding: .6rem .8rem;
+  font-size: 1em;
+  font-weight: 800;
+  font-family: 'Manrope', sans-serif;
+  margin-right: 8px;
+
+  transition: .1s ease all;
+
+  &:hover {
+    background-color: lighten($primaryColor, 5%);
+    transform: translate(2px, -3px);
+    box-shadow: -2px 3px 0 darken($primaryColor, 25%);
+  }
+
+  &:active {
+    transition: .01s ease all;
+    background-color: lighten($primaryColor, 5%);
+    // transform: none;
+    box-shadow: 0 0 0 2px lighten($primaryColor, 25%);
+  }
+
+  .material-icons {
+    vertical-align: middle;
+    margin-right: .4rem;
+  }
+}
+
+.select-container {
+  select {
+    display: none;
+  }
+
+  position: relative;
+  margin: .8rem 0;
+
+  &:hover, &.open {
+    transform: translate(2px, -3px);
+    .options-container {
+      box-shadow: -3px 6px 0 darken($containerBg, 4%);
+    }
+    .label-container {
+      box-shadow: -3px 6px 0 darken($containerBg, 4%);
+    }
+  }
+
+  .label-container {
+    background-color: $bodyBg;
+    color: white;
+
+    cursor: pointer;
+    outline: none;
+
+    border-radius: 6px;
+    padding: .6rem .8rem;
+    font-weight: 800;
+
+    transition: .1s ease all;
+
+    .material-icons {
+      vertical-align: middle;
+    }
+
+    .arrow {
+      float: right;
+    }
+
+    .selection-icon {
+      margin-right: .4rem;
+    }
+  }
+
+  &.open {
+    .label-container {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .options-container {
+      display: block;
+    }
+  }
+
+  .options-container {
+    display: none;
+    position: absolute;
+    background-color: $bodyBg;
+    width: 100%;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      padding: .2rem .8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+        background-color: darken($bodyBg, 5%);
+        cursor: pointer;
+      }
+
+      .material-icons {
+        vertical-align: middle;
+        margin-right: .4rem;
+      }
+    }
+  }
+}
+
+.video-preview {
+  text-align: center;
+  margin: .4rem 0;
+  position: relative;
+  video {
+    background-color: $bodyBg;
+    border-radius: 8px;
+    width: 400px;
+  }
+  p {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: rgba(255,255,255,.3);
+    font-weight: 800;
+  }
+}
+
+.card {
+  position: relative;
+  background-color: $bodyBg;
+  border-radius: 6px;
+
+  margin: 1.8rem 0 .4rem 0;
+  padding: .8rem .8rem .6rem .8rem;
+
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    position: absolute;
+    font-size: 1.4em;
+    top: -1.2rem;
+    left: .6rem;
+    margin: 0;
+
+    .material-icons {
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  }
+
+  .actions {
+    position: absolute;
+    top: .55rem;
+    right: .3rem;
+
+    .btn {
+      padding: .2rem .4rem;
+      font-size: .8rem;
+    }
+  }
+}
+
+.bottom-actions {
+  text-align: right;
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+::selection {
+  background: darken($primaryColor, 10%);
+}
+::-moz-selection {
+  background: darken($primaryColor, 10%);
+}
+
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .7);
+
+  > div {
+    background-color: $containerBg;
+    min-width: 500px;
+    min-height: 200px;
+  }
+
+  p {
+    text-align: justify;
+  }
+}
+
+a, a:visited {
+  color: $primaryColor;
+  &:hover {
+    color: lighten($primaryColor, 5%);
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: lighten($bodyBg, 20%);
+  a, a:visited {
+    margin: 0 .4rem;
+    color: lighten($bodyBg, 25%);
+    &:hover {
+      color: lighten($bodyBg, 30%);
+    }
+  }
+}
