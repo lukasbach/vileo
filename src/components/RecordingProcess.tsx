@@ -51,13 +51,11 @@ export const RecordingProcess: React.FC<{
         videoRef.current.play();
       }
 
-      console.log(props.recordingConfig.video!.getAudioTracks(), (props.recordingConfig.audio?.map(stream => stream.getAudioTracks()).reduce((a, b) => [...a, ...b], []) || []))
-
       const stream = new MediaStream([
-        ...props.recordingConfig.video!.getVideoTracks(),
-        ...props.recordingConfig.video!.getAudioTracks(),
-        ...(props.recordingConfig.audio?.map(stream => stream.getAudioTracks()).reduce((a, b) => [...a, ...b], []) || []),
-      ])
+        props.recordingConfig.video!.getVideoTracks()[0],
+        MediaService.mergeTracks(props.recordingConfig.video!, props.recordingConfig.audio!)?.getAudioTracks()[0]!
+      ]);
+
       recorder.current = new MediaRecorder(stream);
       recorder.current.start(3000);
 

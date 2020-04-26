@@ -19,4 +19,30 @@ export class MediaService {
   public static async getDevices() {
     return await navigator.mediaDevices.enumerateDevices();
   }
+
+  public static mergeTracks(video: MediaStream, audio: MediaStream[]): MediaStream | null {
+    let audioCopy = audio;
+    let videoAudioTrack = video.getAudioTracks()[0];
+
+    if (!videoAudioTrack) {
+      videoAudioTrack = audioCopy[0].getAudioTracks()[0];
+      audioCopy = audioCopy.slice(1);
+    }
+
+    if (!videoAudioTrack) {
+      return null;
+    }
+
+    const audioCtx = new AudioContext();
+    const dst = audioCtx.createMediaStreamDestination();
+    const audioStream = new MediaStream([videoAudioTrack]);
+    audioCtx.createMediaStreamSource(audioStream).connect(dst);
+    for (const audioStream of audioCopy) {
+      audioCtx.createMediaStreamSource(audioStream).connect(dst);
+    }
+
+    const mixedStream = new MediaStream();
+    mixedStream.addTrack(dst.stream.getTracks()[0]);
+    return mixedStream;
+  }
 }
