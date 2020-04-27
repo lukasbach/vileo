@@ -39,8 +39,8 @@ export const Finished: React.FC<{
 
   fileSize = Math.round(fileSize * 100) / 100;
 
-  let seconds = Math.round((props.length / 1000) % 60);
-  let minutes = Math.round((props.length / 1000) / 60);
+  let seconds = Math.floor((props.length / 1000) % 60);
+  let minutes = Math.floor((props.length / 1000) / 60);
 
 
   return (
@@ -56,6 +56,11 @@ export const Finished: React.FC<{
       <p>
         Your video file is <b>{ minutes } minutes and { seconds } seconds</b> long and takes
         up <b>{ fileSize }{ sizeUnit }</b> in space.
+      </p>
+
+      <p>
+        The file is available as <b>.webm</b> video file, which can be opened by web browsers
+        and most video viewers such as VLC.
       </p>
 
       <div className="bottom-actions">

@@ -54,10 +54,10 @@ export const RecordingProcess: React.FC<{
       const stream = new MediaStream([
         props.recordingConfig.video!.getVideoTracks()[0],
         MediaService.mergeTracks(props.recordingConfig.video!, props.recordingConfig.audio!)?.getAudioTracks()[0]!
-      ]);
+      ].filter(stream => !!stream));
 
       recorder.current = new MediaRecorder(stream);
-      recorder.current.start(3000);
+      recorder.current.start(30000);
 
       stream.getTracks().forEach(t => t.addEventListener("ended", () => onStop()));
 

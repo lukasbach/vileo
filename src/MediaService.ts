@@ -24,7 +24,7 @@ export class MediaService {
     let audioCopy = audio;
     let videoAudioTrack = video.getAudioTracks()[0];
 
-    if (!videoAudioTrack) {
+    if (!videoAudioTrack && audioCopy[0]) {
       videoAudioTrack = audioCopy[0].getAudioTracks()[0];
       audioCopy = audioCopy.slice(1);
     }
