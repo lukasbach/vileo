@@ -48,19 +48,14 @@ export const RecordingSettings: React.FC<{
               <>
                 <img height="32" width="32" src="https://unpkg.com/simple-icons@v2/icons/googlechrome.svg" style={{ filter: 'invert(1)' }} />
                 &nbsp;
-                Sharing audio under Chrome
+                Screen Sharing under Chrome
               </>
             )}
           >
             <p>
-              By default, desktop recordings do not include audio. Chrome supports recording desktop audio by
-              checking the option <i>Share&nbsp;Audio</i> in the next dialog, however{' '}
-              <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1074529" target="_blank" rel="noopener noreferrer">a Chrome bug</a>{' '}
-              seems to make sharing audio fail when recording entire screens.
-            </p>
-            <p>
-              You can however record a chrome tab with shared audio. Alternatively you can record windows or screens
-              without sharing audio.
+              You will now be asked to share a screen for recording. You can select <b>"Share Audio"</b> to
+              additionally record audio from the recorded display. This allows you to record applications
+              that play audio such as videos or conferences.
             </p>
             <div className="bottom-actions">
               <Button icon="arrow_back" onClick={() => {
